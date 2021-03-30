@@ -7,8 +7,8 @@ Vue.config.productionTip = false
 import './assets/css/global.css'
 
 //导入element
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 //导入fas图标
@@ -21,9 +21,26 @@ import axios from 'axios'
 // axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 Vue.prototype.$http = axios
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] =
+  'application/x-www-form-urlencoded'
+
+axios.interceptors.request.use(
+  function(config) {
+    // 拦截每次请求,携带token
+    // console.log(config)
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    config.headers.Authorization =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcwOTY4NjksImV4cCI6MTYxNzE4MzI2OX0.tr1hejEUrPSKFdmTav8dalDC18Yf3fvFIySHvPrflRA'
+    return config
+  },
+  function(error) {
+    // Do something with request error
+    return Promise.reject(error)
+    // console.log('wrong')
+  }
+)
 
 new Vue({
   router,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')

@@ -24,6 +24,10 @@ const routes = [
         component: () => import("../components/index/Index.vue"),
       },
       {
+        path: "/goods/:id",
+        component: () => import("../components/goods/GoodsInfo.vue"),
+      },
+      {
         path: "/shoppingcar",
         component: () => import("../components/shoppingcar/Shoppingcar.vue"),
       },

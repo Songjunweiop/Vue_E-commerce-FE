@@ -32,7 +32,7 @@ body,
 }
 
 .el-input__inner{
-  border-radius: 20px;
+  border-radius: 20px !important;
 
 }
 .el-input-group__append{

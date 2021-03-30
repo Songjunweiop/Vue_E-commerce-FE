@@ -1,5 +1,5 @@
 <template>
-  <div>购物车
+  <div>商品详情
     <div style="width: 100%; height: 100px; background-color: black"></div>
   </div>
 </template>
