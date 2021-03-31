@@ -83,12 +83,12 @@ export default {
 
 .el-main {
   background-color: #ffffff;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 260px;
+  padding-right: 260px;
   color: #333;
   // text-align: center;
   // line-height: 160px;
-  .input-with-select{
+  .input-with-select {
     width: 50%;
   }
 }
@@ -98,20 +98,20 @@ export default {
   padding: 0px;
   justify-content: space-between;
   .goods-item {
-    width: 30%;
-    margin: 25px 0;
-    border: 1px solid #ccc;
+    width: 330px;
+    margin: 20px;
+    // border: 1px solid #ccc;
     padding: 2px;
-    box-shadow: 0 0 8px #ccc;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 250px;
     img {
       width: 100%;
+      max-height: 330px;
     }
     h1 {
-      font-size: 14px;
+      font-size: 16px;
     }
     .info {
       // background-color: #eee;
@@ -132,6 +132,13 @@ export default {
         }
       }
     }
+  }
+  .goods-item:hover {
+    box-shadow: 0 0 8px #ccc;
+    cursor: pointer;
+    transition-duration:0.2s;
+    transform: scale(1.01);
+    transition-timing-function: ease-in-out;
   }
 }
 </style>

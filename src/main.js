@@ -30,7 +30,7 @@ axios.interceptors.request.use(
     // console.log(config)
     config.headers.Authorization = window.sessionStorage.getItem('token')
     config.headers.Authorization =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcwOTY4NjksImV4cCI6MTYxNzE4MzI2OX0.tr1hejEUrPSKFdmTav8dalDC18Yf3fvFIySHvPrflRA'
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcxODQzMTcsImV4cCI6MTYxNzI3MDcxN30.g7L6pDdJfgsTSFd0Lph_D59JcAl7nBiMfhh0JqbfFQA'
     return config
   },
   function(error) {

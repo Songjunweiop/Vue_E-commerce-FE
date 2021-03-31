@@ -10,12 +10,12 @@
               </div>
             </el-col>
             <el-col :span="2"></el-col>
-            <el-col :span="12" style="font-size: 18px">
+            <el-col :span="8" style="font-size: 18px">
               电子商务平台
               <div style="margin-left: 10px"></div>
             </el-col>
             <el-col :span="4"></el-col>
-            <el-col :span="2"><div style="font-size: 16px">欢迎！ master</div> </el-col>
+            <el-col :span="4"><div style="font-size: 16px">欢迎！ master</div> </el-col>
       
             <el-col :span="1" style="height: 60px;">
               <img class="touxiang" src="../assets/images/login_img.jpg" />
@@ -45,9 +45,9 @@
           :router="true"
           @select="handleSelect"
         >
-          <el-menu-item index="index">首页</el-menu-item>
-          <el-menu-item index="shoppingcar">我的购物车</el-menu-item>
-          <el-menu-item index="order">订单管理</el-menu-item>
+          <el-menu-item index="/index">首页</el-menu-item>
+          <el-menu-item index="/shoppingcar">我的购物车</el-menu-item>
+          <el-menu-item index="/order">订单管理</el-menu-item>
         </el-menu>
       </el-main>
       <el-footer>
@@ -63,7 +63,7 @@
 export default {
   data() {
     return {
-      activeIndex: '1',
+      activeIndex: '/index',
       activeIndex2: '1',
     }
   },
@@ -94,15 +94,12 @@ export default {
     align-items: center;
     padding: 0px;
     padding-right: 50px;
-    min-width: 200px;
+    // min-width: 200px;
     background-color: #fff;
     > div {
       display: flex;
       align-items: center;
-      .el-input {
-        width: 240px;
-        margin-left: 30px;
-      }
+      
     }
   }
 
@@ -123,7 +120,7 @@ export default {
   padding: 0;
   .el-menu-demo {
     top: 60px;
-    padding: 0 200px;
+    padding: 0 250px;
     z-index: 898;
     // height: 120px;
     width: 100%;

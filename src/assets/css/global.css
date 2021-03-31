@@ -9,7 +9,9 @@ body,
   padding: 0;
   min-width: 1366px;
 }
-
+ul {
+  list-style: none;
+}
 .el-breadcrumb {
   margin-bottom: 15px;
   font-size: 14px;
@@ -31,11 +33,10 @@ body,
   min-height: 300px;
 }
 
-.el-input__inner{
+.el-input__inner {
   border-radius: 20px !important;
-
 }
-.el-input-group__append{
+.el-input-group__append {
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
 }
