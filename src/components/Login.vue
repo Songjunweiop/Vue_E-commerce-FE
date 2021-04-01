@@ -39,8 +39,8 @@ export default {
   data() {
     return {
       form_login: {
-        username: "admin",
-        password: "123456"
+        username: "小蜜蜂",
+        password: "135978"
       },
       loginFormRules: {
         username: [
@@ -61,26 +61,26 @@ export default {
       this.$refs.LoginRef.resetFields(); //element中的resetFields方法
     },
     login() {
+        // this.$router.push("/home")
+      this.$refs.LoginRef.validate(async valid => {
+        if (!valid) return;
+        const { data: res } = await this.$http.post("userlogin", this.form_login);
+        console.log(res);
+        if (res.meta.status !== 200)
+          return this.$notify({
+            title: "错误",
+            message: "登录失败",
+            type: "error"
+          });
+        this.$notify.success({
+          title: "登录成功",
+          message: `欢迎回来~ 亲爱的${res.data.username}`
+        });
+        window.sessionStorage.setItem("token",res.data.token);
+        window.sessionStorage.setItem("username",res.data.username);
+        window.sessionStorage.setItem("user_id",res.data.id);
         this.$router.push("/home")
-      // this.$refs.LoginRef.validate(async valid => {
-      //   if (!valid) return;
-      //   const { data: res } = await this.$http.post("login", this.form_login);
-      //   console.log(res);
-      //   if (res.meta.status !== 200)
-      //     return this.$notify({
-      //       title: "错误",
-      //       message: "登录失败",
-      //       type: "error"
-      //     });
-      //   this.$notify.success({
-      //     title: "登录成功",
-      //     message: `欢迎回来~ 亲爱的${res.data.username}`
-      //   });
-      //   window.sessionStorage.setItem("token",res.data.token);
-      //   window.sessionStorage.setItem("username",res.data.username);
-      //   window.sessionStorage.setItem("roleId",res.data.rid);
-      //   this.$router.push("/home")
-      // });
+      });
     }
   }
 };

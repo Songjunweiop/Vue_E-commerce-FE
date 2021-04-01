@@ -28,9 +28,8 @@ axios.interceptors.request.use(
   function(config) {
     // 拦截每次请求,携带token
     // console.log(config)
-    config.headers.Authorization = window.sessionStorage.getItem('token')
-    config.headers.Authorization =
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcxODQzMTcsImV4cCI6MTYxNzI3MDcxN30.g7L6pDdJfgsTSFd0Lph_D59JcAl7nBiMfhh0JqbfFQA'
+    // config.headers.Authorization = window.sessionStorage.getItem('token')
+    config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcyNzA1MzgsImV4cCI6MTYxNzM1NjkzOH0.yJ2LMxgGFT20X0r1R5lPX2AIporiWfCi5O4lR7VoTnE'
     return config
   },
   function(error) {

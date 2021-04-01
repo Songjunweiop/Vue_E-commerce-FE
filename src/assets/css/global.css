@@ -7,7 +7,10 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  min-width: 1366px;
+  /* position: fixed; */
+  /* min-width: 1366px; */
+  
+  /* overflow: hidden; */
 }
 ul {
   list-style: none;
@@ -39,4 +42,18 @@ ul {
 .el-input-group__append {
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
+}
+.el-input-number__decrease {
+  border-radius: 20px !important;
+  border: 0px !important;
+  background-color: #fff !important;
+}
+.el-input-number__increase{
+  border-radius: 20px !important;
+  border: 0px !important;
+  background-color: #fff !important;
+}
+
+.el-drawer .rtl{
+  overflow: scroll
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container class="home-container">
-      <el-header >
+      <el-header>
         <div class="aaa">
           <el-row style="width: 100%" type="flex" justify="center">
             <el-col :span="4">
@@ -15,18 +15,23 @@
               <div style="margin-left: 10px"></div>
             </el-col>
             <el-col :span="4"></el-col>
-            <el-col :span="4"><div style="font-size: 16px">欢迎！ master</div> </el-col>
-      
+            <el-col :span="4"
+              ><div style="font-size: 16px">欢迎！ {{master}}</div>
+            </el-col>
             <el-col :span="1" style="height: 60px;">
               <img class="touxiang" src="../assets/images/login_img.jpg" />
             </el-col>
             <el-col :span="0.5">
-              <el-dropdown trigger="click" style="margin-left: 0">
+              <el-dropdown
+                trigger="click"
+                style="margin-left: 0"
+                @command="handleCommand"
+              >
                 <span class="el-dropdown-link">
                   <i class="el-icon-arrow-down el-icon--left"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="b">欢迎 master </el-dropdown-item>
+                  <el-dropdown-item command="b">欢迎 {{master}} </el-dropdown-item>
                   <el-dropdown-item command="a" style="text-align: center"
                     >退出</el-dropdown-item
                   >
@@ -61,6 +66,10 @@
 
 <script>
 export default {
+  created() {
+    this.master = window.sessionStorage.getItem('username')
+    this.activePath = window.sessionStorage.getItem('activePath');
+  },
   data() {
     return {
       activeIndex: '/index',
@@ -70,6 +79,13 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleCommand(command) {
+      if (command === 'a') {
+        console.log('sdafsda')
+        // window.sessionStorage.clear();
+        this.$router.push('/login');
+      }
     },
   },
 }
@@ -82,7 +98,7 @@ export default {
   font-size: 19px;
 }
 .el-header {
-  z-index: 9999;
+  z-index: 1;
   position: fixed;
   font-size: 17px;
   overflow: hidden;
@@ -99,7 +115,6 @@ export default {
     > div {
       display: flex;
       align-items: center;
-      
     }
   }
 
