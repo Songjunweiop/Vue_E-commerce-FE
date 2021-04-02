@@ -89,12 +89,13 @@ export default {
   },
   data() {
     return {
-      orderList: {},
+      orderList: [],
       queryInfo: {
         query: window.sessionStorage.getItem('user_id'),
         pagenum: 1,
         pagesize: 10,
       },
+      total: ''
     }
   },
   methods: {

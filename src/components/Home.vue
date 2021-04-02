@@ -51,7 +51,7 @@
           @select="handleSelect"
         >
           <el-menu-item index="/index">首页</el-menu-item>
-          <el-menu-item index="/shoppingcar">我的购物车</el-menu-item>
+          <el-menu-item index="/shoppingcar">购物单</el-menu-item>
           <el-menu-item index="/order">订单管理</el-menu-item>
         </el-menu>
       </el-main>
@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     },
     handleCommand(command) {
       if (command === 'a') {

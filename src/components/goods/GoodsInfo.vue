@@ -66,8 +66,8 @@
           >
             <h3>购买</h3>
           </el-card>
-          <el-card shadow="hover" class="box-card handle">
-            <h3>加入购物车</h3>
+          <el-card shadow="hover" class="box-card handle" @click.native="adddialog = true">
+            <h3>加入购物清单</h3>
           </el-card>
         </div>
       </div>
@@ -131,6 +131,63 @@
         </el-card>
       </div>
     </el-drawer>
+    <el-drawer
+      :title="title"
+      :visible.sync="adddialog"
+      direction="rtl"
+      custom-class="demo-drawer"
+      ref="adddrawer"
+      :open="open()"
+      :wrapperClosable="true"
+    >
+      <el-form class="but_from">
+        <el-form-item>
+          <!-- <el-input v-model="goodsinfo.goods_name"></el-input> -->
+          <h1>添加{{ this.goodsinfo.goods_name }}到您的购物清单中</h1>
+        </el-form-item>
+        <el-form-item label="">
+          <el-image
+            style="width: 200px; height: 200px"
+            :src="goods_url"
+            fit="cover"
+          >
+            <div slot="error" class="image-slot">暂无</div></el-image
+          >
+        </el-form-item>
+        <el-form-item label="数量">
+          <el-input-number
+            v-model="num"
+            @change="handleChange"
+            :min="1"
+            :max="10"
+            class="aaa"
+          ></el-input-number>
+        </el-form-item>
+        <el-form-item label="总价">
+          <el-card
+            @click.native="dialog = true"
+            shadow="never"
+            class="box-card handle price_total"
+          >
+            <h3>{{ this.price_total }}</h3>
+          </el-card>
+        </el-form-item>
+        <el-form-item label="请填写您的收获地址">
+          <el-input v-model="address"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <div class="demo-drawer__footer">
+        <el-card
+          @click.native="addToCar"
+          shadow="hover"
+          class="box-card handle"
+          style="border: 0px; cursor: pointer;"
+        >
+          <h3>添加到购物清单</h3>
+        </el-card>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -146,6 +203,7 @@ export default {
       manyTabData: [],
       goods_url: '',
       dialog: false,
+      adddialog: false,
       loading: false,
       title: '',
       num: '1',
@@ -187,12 +245,9 @@ export default {
       this.dialog = false
     },
     handleChange() {
-      console.log(this.goodsinfo.goods_price, this.num)
       this.price_total = this.goodsinfo.goods_price * this.num
-      console.log(this.price_total)
     },
     async handleBuy() {
-      console.log('aaaa')
       const { data: res } = await this.$http.post('orders', {
         user_id: this.user_id,
         order_price: this.price_total,
@@ -207,8 +262,23 @@ export default {
 
       this.dialog = false
       this.$message.success('购买成功！请耐心等待发货');
-
     },
+    async addToCar() {
+      const { data: res } = await this.$http.post('car', {
+        user_id: this.user_id,
+        order_price: this.price_total,
+        order_pay: '0',
+        is_send: '否',
+        order_fapiao_title: '',
+        consignee_addr: this.address,
+        order_fapiao_content: this.goodsinfo.goods_name,
+        trade_no: this.num
+      })
+      if (res.meta.status !== 201) return this.$message.error(res.meta.msg)
+
+      this.adddialog = false
+      this.$message.success('添加到购物清单成功，请及时下单');
+    }
   },
 }
 </script>
