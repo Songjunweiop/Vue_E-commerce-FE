@@ -200,6 +200,8 @@ export default {
         is_send: '否',
         order_fapiao_title: '',
         consignee_addr: this.address,
+        order_fapiao_content: this.goodsinfo.goods_name,
+        trade_no: this.num
       })
       if (res.meta.status !== 201) return this.$message.error(res.meta.msg)
 

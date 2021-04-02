@@ -57,3 +57,8 @@ ul {
 .el-drawer .rtl{
   overflow: scroll
 }
+
+.el-form-item__label {
+  width: 90px;
+  color: #99a9bf !important;
+}
