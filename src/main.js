@@ -29,7 +29,8 @@ axios.interceptors.request.use(
     // 拦截每次请求,携带token
     // console.log(config)
     // config.headers.Authorization = window.sessionStorage.getItem('token')
-    config.headers.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTcyNzA1MzgsImV4cCI6MTYxNzM1NjkzOH0.yJ2LMxgGFT20X0r1R5lPX2AIporiWfCi5O4lR7VoTnE'
+    config.headers.Authorization =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjUwMCwicmlkIjowLCJpYXQiOjE2MTkxODQ4MTYsImV4cCI6MTYxOTI3MTIxNn0.OTOpaQ_kaldwxggjTgVEmokbmw1lNJtmuPjXmHTW2jw'
     return config
   },
   function(error) {
@@ -40,7 +41,7 @@ axios.interceptors.request.use(
 )
 
 Vue.filter('dateFormat', function(originVal) {
-  const dt = new Date(originVal*1000)
+  const dt = new Date(originVal * 1000)
   const y = dt.getFullYear()
   const m = (dt.getMonth() + 1 + '').padStart(2, '0')
   const d = (dt.getDate() + '').padStart(2, '0')

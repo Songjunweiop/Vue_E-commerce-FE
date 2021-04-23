@@ -1,7 +1,11 @@
 <template>
   <div>
     <!-- <el-button type="primary" @click="handleCommand">sdafsdaf</el-button> -->
-    <el-table :data="orderList" class="mytable" :default-sort = "{prop: 'order_id', order: 'descending'}">
+    <el-table
+      :data="orderList"
+      class="mytable"
+      :default-sort="{ prop: 'order_id', order: 'descending' }"
+    >
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
@@ -10,7 +14,7 @@
             </el-form-item>
             <el-form-item label="下单时间" prop="create_time">
               <span>
-                  {{ props.row.create_time | dateFormat }}
+                {{ props.row.create_time | dateFormat }}
               </span>
             </el-form-item>
 
@@ -27,14 +31,12 @@
               <span>{{ props.row.order_price }} 元</span>
             </el-form-item>
             <el-form-item label="支付方式">
-              <span
-                >
-                  <div v-if="props.row.order_pay === '0'">未支付</div>
-                  <div v-if="props.row.order_pay === '1'">支付宝</div>
-                  <div v-if="props.row.order_pay === '2'">微信</div>
-                  <div v-if="props.row.order_pay === '3'">银行卡</div>
-                </span
-              >
+              <span>
+                <div v-if="props.row.order_pay === '0'">未支付</div>
+                <div v-if="props.row.order_pay === '1'">支付宝</div>
+                <div v-if="props.row.order_pay === '2'">微信</div>
+                <div v-if="props.row.order_pay === '3'">银行卡</div>
+              </span>
             </el-form-item>
             <el-form-item label="发票抬头">
               <span>{{ props.row.order_fapiao_title }}</span>
@@ -66,6 +68,17 @@
           {{ scope.row.create_time | dateFormat }}
         </template>
       </el-table-column>
+      <el-table-column label="操作" width="300">
+        <template slot-scope="scope">
+          <el-card
+            shadow="hover"
+            class="box-card handle"
+            @click.native="deleteById(scope.row.order_id)"
+          >
+            删除
+          </el-card>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -95,7 +108,7 @@ export default {
         pagenum: 1,
         pagesize: 10,
       },
-      total: ''
+      total: '',
     }
   },
   methods: {
@@ -121,12 +134,32 @@ export default {
       this.queryInfo.pagenum = newPage
       this.getMyorders()
     },
+    async deleteById(id) {
+      console.log(id)
+      const confirmResult = await this.$confirm(
+        '您确定要删除该订单吗？',
+        `${this.master}:`,
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      ).catch((err) => err)
+      console.log(confirmResult)
+      if (confirmResult !== 'confirm') {
+        return this.$message.info('已取消删除')
+      }
+      const { data: res } = await this.$http.delete('orders/' + id)
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.$message.success('删除订单成功！')
+      this.getMyorders()
+    },
   },
 }
 </script>
 <style lang="less" scoped>
 .mytable {
-  width: 60%;
+  width: 80%;
   min-height: 600px;
   margin: 50px auto;
 }
@@ -141,5 +174,15 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+.handle {
+  cursor: pointer;
+  float: left;
+  width: 100px;
+  height: 63px;
+  text-align: center;
+  margin-right: 20px;
+  // line-height: 50px;
+  padding: 0 !important;
 }
 </style>
