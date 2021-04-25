@@ -28,7 +28,7 @@
 
         <el-form-item class="btns">
           <el-button type="primary" @click="login" round>登录</el-button>
-          <el-button type="info" @click="rest" round>重置</el-button>
+          <el-button type="info" @click="zhuce" round>注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -55,10 +55,8 @@ export default {
     };
   },
   methods: {
-    // 点击重置
-    rest() {
-      console.log("this");
-      this.$refs.LoginRef.resetFields(); //element中的resetFields方法
+    zhuce() {
+      this.$router.push("/zhuce")
     },
     login() {
         // this.$router.push("/home")
