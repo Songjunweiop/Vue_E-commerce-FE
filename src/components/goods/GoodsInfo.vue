@@ -66,7 +66,11 @@
           >
             <h3>购买</h3>
           </el-card>
-          <el-card shadow="hover" class="box-card handle" @click.native="adddialog = true">
+          <el-card
+            shadow="hover"
+            class="box-card handle"
+            @click.native="adddialog = true"
+          >
             <h3>加入购物清单</h3>
           </el-card>
         </div>
@@ -223,6 +227,7 @@ export default {
       const { data: res } = await this.$http.get('goods/' + this.id)
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.goodsinfo = res.data
+      console.log(this.goodsinfo)
       res.data.attrs.forEach((item) => {
         item.attr_value = item.attr_value ? item.attr_value.split(',') : []
         // 控制文本显示隐藏
@@ -256,12 +261,22 @@ export default {
         order_fapiao_title: '',
         consignee_addr: this.address,
         order_fapiao_content: this.goodsinfo.goods_name,
-        trade_no: this.num
+        trade_no: this.num,
       })
       if (res.meta.status !== 201) return this.$message.error(res.meta.msg)
 
+      const { data: res1 } = await this.$http.put('goods/' + this.id, {
+        // goods_name: this.editForm.goods_name,
+        // goods_price: this.editForm.goods_price,
+        goods_number: this.goodsinfo.goods_number - 1,
+        // goods_weight: this.editForm.goods_weight
+      })
+      if (res1.meta.status !== 200) return this.$message.error(res1.meta.msg)
+
+      this.getGoodsinfobyid()
+
       this.dialog = false
-      this.$message.success('购买成功！请耐心等待发货');
+      this.$message.success('购买成功！请耐心等待发货')
     },
     async addToCar() {
       const { data: res } = await this.$http.post('car', {
@@ -272,13 +287,22 @@ export default {
         order_fapiao_title: '',
         consignee_addr: this.address,
         order_fapiao_content: this.goodsinfo.goods_name,
-        trade_no: this.num
+        trade_no: this.num,
       })
       if (res.meta.status !== 201) return this.$message.error(res.meta.msg)
 
+      const { data: res1 } = await this.$http.put('goods/' + this.id, {
+        // goods_name: this.editForm.goods_name,
+        // goods_price: this.editForm.goods_price,
+        goods_number: this.goodsinfo.goods_number - 1,
+        // goods_weight: this.editForm.goods_weight
+      })
+      if (res1.meta.status !== 200) return this.$message.error(res1.meta.msg)
+
+      this.getGoodsinfobyid()
       this.adddialog = false
-      this.$message.success('添加到购物清单成功，请及时下单');
-    }
+      this.$message.success('添加到购物清单成功，请及时下单')
+    },
   },
 }
 </script>
